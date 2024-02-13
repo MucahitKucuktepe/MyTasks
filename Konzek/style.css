@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 .navbar {
-  border: 2px solid red;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -14,4 +13,21 @@
   height: 60px;
   background-color: aquamarine;
   text-shadow: 3px 3px 3px white;
+}
+.inputSession{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+#filterInput{
+    width: 300px;
+    height: 30px;
+    border: 2px solid gray;
+}
+
+.countries{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
 }
