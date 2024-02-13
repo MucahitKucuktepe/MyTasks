@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar {
+  border: 2px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Protest Revolution", sans-serif;
+  height: 60px;
+  background-color: aquamarine;
+  text-shadow: 3px 3px 3px white;
+}
