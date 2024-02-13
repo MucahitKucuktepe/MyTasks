@@ -9,9 +9,7 @@ const fetchData = async () => {
       countries {
         name
         capital
-        languages{
-            name
-        }
+        awsRegion
       }
     }
   `;
@@ -33,29 +31,31 @@ const fetchData = async () => {
 
     selectedItem = data.countries?.length > 0 ? data.countries[9] : null;
     console.log(selectedItem);
-    renderList(data.countries)
+    country = data?.countries;
+    renderList(data.countries);
   } catch (error) {
     console.log(error);
   }
 };
 fetchData();
 
-function renderList(countries) {
+const renderList = (countries) => {
   const countryList = document.getElementById("countryList");
-  countryList.innerHTML = "";
+  countryList.textContent = `${selectedItem.name}, capital: ${selectedItem?.capital}, awsRegion: ${selectedItem.awsRegion}`;
+  console.log();
   console.log(countries);
   countries?.forEach((item) => {
     const listItem = document.createElement("li");
-    listItem.textContent = item.name;
+    listItem.textContent = `${item.name}, capital: ${item?.capital}, awsRegion: ${item.awsRegion}`;
     listItem.style.backgroundColor =
       selectedItem && selectedItem.id === item.id
         ? predefinedColors[selectedColorIndex]
-        : "white";
+        : "green";
 
     listItem.addEventListener("click", () => handleItemClick(item));
     countryList.appendChild(listItem);
   });
-}
+};
 
 function handleItemClick(item) {
   selectedItem = item;
@@ -63,4 +63,11 @@ function handleItemClick(item) {
   renderList();
 }
 
-document.getElementById("searchInput").addEventListener("input", fetchData);
+const search = document.getElementById("searchInput");
+search.addEventListener("input", (e) => {
+  console.log(e.target.value);
+  const value = e.target.value.toLowerCase();
+  console.log(country);
+  const newArr=country.filter((item)=>item.name.toLowerCase().includes(value))
+  console.log(newArr)
+});
