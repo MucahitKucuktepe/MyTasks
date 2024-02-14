@@ -1,8 +1,10 @@
 const predefinedColors = ["#FF5733", "#33FF57", "#5733FF"];
 let selectedColorIndex = 0;
 let selectedItem = null;
+const countryList = document.getElementById("countryList");
 
 const fetchData = async () => {
+  let selectedCountry={}
   const endpoint = "https://countries.trevorblades.com/graphql";
   const query = `
     query {
@@ -32,17 +34,26 @@ const fetchData = async () => {
     selectedItem = data.countries?.length > 0 ? data.countries[9] : null;
     console.log(selectedItem);
     country = data?.countries;
-    renderList(data.countries);
+      countryList.textContent = `${selectedItem.name}, capital: ${selectedItem?.capital}, awsRegion: ${selectedItem.awsRegion}`;
   } catch (error) {
     console.log(error);
   }
+  return selectedItem
 };
 fetchData();
 
+const search = document.getElementById("searchInput");
+search.addEventListener("input", (e) => {
+  console.log(e.target.value);
+  const value = e.target.value.toLowerCase();
+  console.log(country);
+  const newArr=country.filter((item)=>item.name.toLowerCase().includes(value))
+  console.log(newArr)
+  renderList(newArr)
+
+});
+
 const renderList = (countries) => {
-  const countryList = document.getElementById("countryList");
-  countryList.textContent = `${selectedItem.name}, capital: ${selectedItem?.capital}, awsRegion: ${selectedItem.awsRegion}`;
-  console.log();
   console.log(countries);
   countries?.forEach((item) => {
     const listItem = document.createElement("li");
@@ -55,6 +66,8 @@ const renderList = (countries) => {
     listItem.addEventListener("click", () => handleItemClick(item));
     countryList.appendChild(listItem);
   });
+
+  
 };
 
 function handleItemClick(item) {
@@ -63,11 +76,4 @@ function handleItemClick(item) {
   renderList();
 }
 
-const search = document.getElementById("searchInput");
-search.addEventListener("input", (e) => {
-  console.log(e.target.value);
-  const value = e.target.value.toLowerCase();
-  console.log(country);
-  const newArr=country.filter((item)=>item.name.toLowerCase().includes(value))
-  console.log(newArr)
-});
+
