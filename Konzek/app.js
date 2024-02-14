@@ -55,6 +55,7 @@ search.addEventListener("input", (e) => {
 
 const renderList = (countries) => {
   console.log(countries);
+  countryList.innerHTML = ""
   countries?.forEach((item) => {
     const listItem = document.createElement("li");
     listItem.textContent = `${item.name}, capital: ${item?.capital}, awsRegion: ${item.awsRegion}`;
