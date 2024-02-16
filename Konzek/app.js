@@ -62,7 +62,7 @@ const renderList = (countries) => {
     listItem.style.backgroundColor =
       selectedItem && selectedItem.id === item.id
         ? predefinedColors[selectedColorIndex]
-        : "green";
+        : "white";
 
     listItem.addEventListener("click", () => handleItemClick(item));
     countryList.appendChild(listItem);
